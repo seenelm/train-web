@@ -48,8 +48,31 @@ h1 {
   will-change: filter;
   transition: filter 300ms;
 }
+
+.appstore {
+  height: 3em;
+  margin: 2em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert(100%);
+  }
+
+  .appstore {
+    filter: invert(100%);
+  }
+
+  .logo:hover {
+    filter: invert(100%) drop-shadow(0 0 2em #646cffaa);
+  }
 }
 .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #3178c6aa);
