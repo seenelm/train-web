@@ -220,3 +220,63 @@ button:focus-visible {
     background-color: black;
   }
 }
+/* Media queries for responsiveness */
+@media (max-width: 768px) { /* Targets tablets and mobile devices */
+  
+  h1 {
+    font-size: 2.5em; /* Smaller font size for smaller screens */
+  }
+  
+  #app {
+    padding: 1rem; /* Reduce padding */
+  }
+  
+  .input-container {
+    width: 80%; /* Increase width for better use of space */
+    padding: 8px; /* Adjust padding */
+  }
+  
+  .text-input {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+  
+  .coming-soon {
+    font-size: 4em; /* Reduce headline size for readability */
+  }
+  
+  #icon-container img {
+    width: 30px; /* Smaller icons */
+    height: 30px;
+  }
+  
+  .logo, .appstore {
+    height: 2em; /* Reduce logo and appstore icon size */
+    padding: 1em; /* Reduce padding */
+  }
+
+  .submit-button {
+    padding: 0 8px; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 480px) { /* Targets small mobile devices */
+  h1 {
+    font-size: 2em; /* Even smaller font size */
+  }
+  
+  .input-container {
+    width: 95%; /* Utilize almost full width */
+  }
+  
+  #response {
+    top: 90%; /* Adjust position */
+  }
+  
+  .coming-soon {
+    font-size: 3em; /* Adjust heading size */
+  }
+
+  #icon-container {
+    margin-top: 10px; /* Less space */
+  }
+}
