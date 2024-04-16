@@ -43,18 +43,98 @@ h1 {
 }
 
 .logo {
-  height: 6em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
 
 .appstore {
+  position: absolute;
+  top: 0;
+  right: 0;
   height: 3em;
-  margin: 2em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px; /* Adjust as needed */
+  background-color: black;
+  border-radius: 5px;
+  width: 60%; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  margin: 0 auto; /* Centers the container */
+}
+
+.text-input {
+  background-color: black;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.fade-out {
+  animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+#icon-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#icon-container img {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;  /* Optional: Adds spacing between icons */
+}
+
+.submit-button {
+  position: absolute;
+  right: 0; /* Right position with some padding from the edge */
+  top: 0; /* Aligns top edge of the button with the container */
+  bottom: 0; /* Aligns bottom edge of the button with the container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none; /* Ensures no extra space is used for borders */
+  background-color: white; /* Example background color, change as needed */
+  color: black; /* Text color */
+  padding: 0 12px; /* Horizontal padding only, adjust as needed */
+  box-sizing: border-box; /* Ensures padding and border are included in height/width calculations */
+}
+
+
+@font-face {
+  font-family: 'Trenda';
+  src: url('./assets/fonts/Trenda Heavy.otf') format('opentype');
+}
+
+.coming-soon {
+  font-family: 'Trenda', Arial, roboto;
+  font-size: 7em;
+  line-height: 1.2;
+  background: linear-gradient(to right, lightgreen, green, blue, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .logo:hover {
@@ -73,6 +153,10 @@ h1 {
   .logo:hover {
     filter: invert(100%) drop-shadow(0 0 2em #646cffaa);
   }
+
+  #icon-container img {
+    filter: invert(100%);
+  }
 }
 .logo.vanilla:hover {
   filter: drop-shadow(0 0 2em #3178c6aa);
@@ -86,6 +170,17 @@ h1 {
   color: #888;
 }
 
+#myForm {
+  position: relative;
+}
+
+#response {
+  position: absolute;
+  top: 85%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -93,7 +188,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  color: black;
+  background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -113,7 +209,14 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
+  .input-container {
+    background-color: #f7f7f7;
+  }
+  .text-input {
+    background-color: #f7f7f7;
+  }
+  .submit-button {
+    color: white;
+    background-color: black;
   }
 }
