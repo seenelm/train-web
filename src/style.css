@@ -132,9 +132,7 @@ h1 {
   font-family: 'Trenda', Arial, roboto;
   font-size: 7em;
   line-height: 1.2;
-  background: linear-gradient(to right, lightgreen, green, blue, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: white;
 }
 
 .logo:hover {
@@ -214,6 +212,9 @@ button:focus-visible {
   }
   .text-input {
     background-color: #f7f7f7;
+  }
+  .coming-soon {
+    color: black;
   }
   .submit-button {
     color: white;

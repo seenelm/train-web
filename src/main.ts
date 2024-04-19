@@ -14,8 +14,9 @@ import darkanimation from './assets/success-animation.json'
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <a target="_blank">
-      <img src="${logo}" class="logo" alt="Vite logo" />
+      <img src="${logo}" class="logo" alt=logo" />
     </a>
+    
     <h1 class="coming-soon">Coming Soon</h1>
     <p class="read-the-docs">
       We're the first app that enables coaches, athletes, and parents to collaborate and communicate in real-time.
@@ -26,7 +27,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <input type="hidden" name="apikey" value="62980bc9-99df-4b48-b25f-21b3c2d9a94f">
       <div class="input-container">
         <input type="email" name="email" class="text-input" placeholder="Please enter your email address" required/>
-        <button id="submit-button" class="submit-button" type="submit">Submit</button>
+        <button id="submit-button" class="submit-button" type="submit">Notify</button>
       </div>
     </form>
 
