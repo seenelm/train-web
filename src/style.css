@@ -154,6 +154,11 @@ h1 {
   margin-left: 10px;
 }
 
+.letter {
+  font-family: 'Trenda', sans-serif;
+
+}
+
 .flex-container:hover .letter:nth-child(1) {
   transform: translate(0%, -20%) rotate(5deg);
 }
