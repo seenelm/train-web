@@ -14,7 +14,7 @@
 }
 @font-face {
   font-family: 'Trenda';
-  src: url('./src/assets/fonts/TrendaHeavy.otf') format('opentype'),
+  src: url('src/assets/fonts/TrendaHeavy.otf') format('opentype'),
 }
 
 a {
@@ -156,7 +156,6 @@ h1 {
 
 .letter {
   font-family: 'Trenda', sans-serif;
-
 }
 
 .flex-container:hover .letter:nth-child(1) {
@@ -189,8 +188,6 @@ h1 {
 .flex-container:hover .letter:nth-child(10) {
   transform: translate(10%, 20%) rotate(9deg);
 }
-
-
 
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
