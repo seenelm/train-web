@@ -11,20 +11,37 @@ import lightanimation from './assets/white-animation.json'
 import darkanimation from './assets/success-animation.json'
 
 
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <a target="_blank">
       <img src="${logo}" class="logo" alt=logo" />
     </a>
-    
-    <h1 class="coming-soon">Coming Soon</h1>
+    <div class="flex-container">
+      <h1 class="coming">
+        <span class="letter">C</span>
+        <span class="letter">o</span>
+        <span class="letter">m</span>
+        <span class="letter">i</span>
+        <span class="letter">n</span>
+        <span class="letter">g</span>
+      </h1>
+      <h1 class="soon">
+        <span class="letter">S</span>
+        <span class="letter">o</span>
+        <span class="letter">o</span>
+        <span class="letter">n</span>
+      </h1>
+    </div>
     <p class="read-the-docs">
       We're the first app that enables coaches, athletes, and parents to collaborate and communicate in real-time.
     </p>
 
     <img src="${appstore}" class="appstore" alt="App Store" />
     <form id="myForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="apikey" value="62980bc9-99df-4b48-b25f-21b3c2d9a94f">
+      <input type="hidden" name="apikey" value="${import.meta.env.VITE_KEY}">
+      <input type="hidden" name="from_name" value="Notify" />
+      <input type="hidden" name="subject" value="New User Interested in TrainApp" />
       <div class="input-container">
         <input type="email" name="email" class="text-input" placeholder="Please enter your email address" required/>
         <button id="submit-button" class="submit-button" type="submit">Notify</button>

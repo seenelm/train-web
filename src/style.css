@@ -12,6 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+@font-face {
+  font-family: 'Trenda';
+  src: url('./src/assets/fonts/Trenda Heavy.otf') format('opentype'),
+}
 
 a {
   font-weight: 500;
@@ -122,18 +126,66 @@ h1 {
   box-sizing: border-box; /* Ensures padding and border are included in height/width calculations */
 }
 
-
-@font-face {
-  font-family: 'Trenda';
-  src: url('./assets/fonts/Trenda Heavy.otf') format('opentype');
+.letter {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  margin: 0 0.001em
 }
 
-.coming-soon {
-  font-family: 'Trenda', Arial, roboto;
-  font-size: 7em;
-  line-height: 1.2;
-  color: white;
+.flex-container {
+  display: flex;
+  justify-content: center;
+  
 }
+.coming {
+  font-family: 'Trenda', sans-serif;
+  font-size: 5em;
+  letter-spacing: -5px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.soon {
+  font-family: 'Trenda', sans-serif;
+  font-size: 5em;
+  letter-spacing: -5px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.flex-container:hover .letter:nth-child(1) {
+  transform: translate(0%, -20%) rotate(5deg);
+}
+.flex-container:hover .letter:nth-child(2) {
+  transform: translate(0%, 20%) rotate(-3deg);
+}
+.flex-container:hover .letter:nth-child(3) {
+  transform: translate(0%, -40%) rotate(-5deg);
+}
+.flex-container:hover .letter:nth-child(4) {
+  transform: translate(0%, 15%) rotate(5deg);
+}
+.flex-container:hover .letter:nth-child(5) {
+  transform: translate(0%, 20%) rotate(-6deg);
+}
+.flex-container:hover .letter:nth-child(6) {
+  transform: translate(30%, 20%) rotate(10deg);
+}
+.flex-container:hover .letter:nth-child(7) {
+  transform: translate(0%, 20%) rotate(-5deg);
+}
+.flex-container:hover .letter:nth-child(8) {
+  transform: translate(0%, -32%) rotate(8deg);
+}
+.flex-container:hover .letter:nth-child(9) {
+  transform: translate(0%, 20%) rotate(-5deg);
+}
+.flex-container:hover .letter:nth-child(10) {
+  transform: translate(10%, 20%) rotate(9deg);
+}
+
+
 
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
@@ -213,7 +265,10 @@ button:focus-visible {
   .text-input {
     background-color: #f7f7f7;
   }
-  .coming-soon {
+  .coming {
+    color: black;
+  }
+  .soon {
     color: black;
   }
   .submit-button {
@@ -241,7 +296,10 @@ button:focus-visible {
     font-size: 14px; /* Adjust font size for smaller screens */
   }
   
-  .coming-soon {
+  .coming {
+    font-size: 4em; /* Reduce headline size for readability */
+  }
+  .soon {
     font-size: 4em; /* Reduce headline size for readability */
   }
   
@@ -273,7 +331,10 @@ button:focus-visible {
     top: 90%; /* Adjust position */
   }
   
-  .coming-soon {
+  .coming {
+    font-size: 3em; /* Adjust heading size */
+  }
+  .soon {
     font-size: 3em; /* Adjust heading size */
   }
 
