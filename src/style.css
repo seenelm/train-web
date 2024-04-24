@@ -69,12 +69,12 @@ h1 {
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding: 10px; /* Adjust as needed */
+  padding: 10px;
   background-color: black;
   border-radius: 5px;
-  width: 60%; /* Adjust as needed */
-  height: 30px; /* Adjust as needed */
-  margin: 0 auto; /* Centers the container */
+  width: 60%;
+  height: 30px;
+  margin: 0 auto;
 }
 
 .text-input {
