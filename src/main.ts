@@ -73,35 +73,47 @@ window.onload = function() {
   document.getElementById('myForm')!.addEventListener('submit', function(event) {
     event.preventDefault();
 
+    const formData = new FormData(event.target as HTMLFormElement);
+    const email = formData.get('email') as string;
+
+    // Function to send data to your custom endpoint
+    function sendToCustomEndpoint(email: string) {
+      fetch(import.meta.env.VITE_API_CUSTOM, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ recipient: email, name : 'TrainApp'})
+      })
+      .then(response => response.json())
+      .then(data => console.log('Success:', data))
+      .catch(error => console.error('Error:', error));
+    }
+
+    // Web3Forms API request
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://api.web3forms.com/submit', true);
+    xhr.open('POST', import.meta.env.VITE_API_WEB3FORMS, true);
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.onreadystatechange = function () {
       if (xhr.readyState !== 4) return;
       if (xhr.status >= 200 && xhr.status < 300) {
-        // Replace the button text with the animation
         var button = document.getElementById('submit-button')!;
-        button.innerHTML = '<div id="animation" style="width: 50px; height: 50px;"></div>'; // adjust the size as needed
+        button.innerHTML = '<div id="animation" style="width: 50px; height: 50px;"></div>';
 
-        // Check if the user's system is in dark mode
         var isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Choose the animation based on the mode
         var animation = isDarkMode ? darkanimation : lightanimation;
 
-        // Load and play the animation
         lottie.loadAnimation({
-          container: document.getElementById('animation')!, // the DOM element that will contain the animation
+          container: document.getElementById('animation')!,
           renderer: 'svg',
           loop: false,
           autoplay: true,
-          animationData: animation // the animation data
+          animationData: animation
         });
 
         var response = document.getElementById('response')!;
         response.innerHTML = 'We\'ll contact you when we\'ve launched!';
 
-        // Fade out the animation, response, and text input after 5 seconds
         setTimeout(function() {
           button.classList.add('fade-out');
           response.classList.add('fade-out');
@@ -112,6 +124,9 @@ window.onload = function() {
         document.getElementById('response')!.innerHTML = 'Error: ' + xhr.responseText;
       }
     };
-    xhr.send(new FormData(event.target as HTMLFormElement)); // event.target is the form
+    xhr.send(formData);
+
+    // Also send data to your custom endpoint
+    sendToCustomEndpoint(email);
   });
 }
