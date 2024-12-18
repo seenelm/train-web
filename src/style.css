@@ -31,6 +31,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -43,6 +44,7 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow: hidden;
 }
 
 .logo {
@@ -69,11 +71,13 @@ h1 {
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center; /* Ensure input aligns vertically */
+  padding: 12px; /* Slightly larger padding for comfort */
   background-color: black;
   border-radius: 5px;
-  width: 60%;
-  height: 30px;
+  width: 80%; /* Adjusted width for mobile */
+  max-width: 500px; /* Prevent overly large inputs on larger screens */
+  height: auto; /* Let height adjust based on content */
   margin: 0 auto;
 }
 
@@ -82,8 +86,10 @@ h1 {
   flex-grow: 1;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 16px; /* Ensure minimum 16px font size */
+  padding: 0.5em; /* Add padding for comfort */
 }
+
 
 .fade-out {
   animation: fadeOut 5s forwards;
@@ -325,7 +331,11 @@ button:focus-visible {
   }
   
   .input-container {
-    width: 95%; /* Utilize almost full width */
+    width: 90%; /* Utilize almost full width */
+  }
+
+  .text-input {
+    font-size: 16px; /* Smaller font size */
   }
   
   #response {
