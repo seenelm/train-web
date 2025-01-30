@@ -5,4 +5,17 @@
 <path d="M0 19C0 9.05887 8.05887 1 18 1H218C227.941 1 236 9.05888 236 19V242H18C8.05887 242 0 233.941 0 224V19Z" fill="black"/>
 <rect x="236" y="211" width="232" height="117" fill="black"/>
 <path d="M284 168L335.962 215.25H232.038L284 168Z" fill="black"/>
+<style>
+  @media (prefers-color-scheme: dark) {
+    path, rect {
+      fill: white;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    path, rect {
+      fill: black;
+    }
+  }
+</style>
+
 </svg>

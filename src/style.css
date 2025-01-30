@@ -199,9 +199,9 @@ h1 {
 }
 
 @media (prefers-color-scheme: dark) {
-  .logo {
+  /* .logo {
     filter: invert(100%);
-  }
+  } */
 
   .appstore {
     filter: invert(100%);
