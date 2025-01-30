@@ -208,7 +208,7 @@ h1 {
   }
 
   .logo:hover {
-    filter: invert(100%) drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
   }
 
   #icon-container img {

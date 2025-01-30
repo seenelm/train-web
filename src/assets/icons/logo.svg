@@ -1,21 +1,19 @@
-<svg width="704" height="708" viewBox="0 0 704 708" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M451.08 7.2679C459.978 -1.26564 474.022 -1.26561 482.92 7.26793L659.536 176.65C674.493 190.994 664.339 216.25 643.616 216.25H290.384C269.661 216.25 259.507 190.994 274.464 176.65L451.08 7.2679Z" fill="black"/>
-<path d="M218 242H452C460.837 242 468 249.163 468 258V692C468 700.837 460.837 708 452 708H234C225.163 708 218 700.837 218 692V242Z" fill="black"/>
-<path d="M468 1H686C695.941 1 704 9.05888 704 19V224C704 233.941 695.941 242 686 242H468V1Z" fill="black"/>
-<path d="M0 19C0 9.05887 8.05887 1 18 1H218C227.941 1 236 9.05888 236 19V242H18C8.05887 242 0 233.941 0 224V19Z" fill="black"/>
-<rect x="236" y="211" width="232" height="117" fill="black"/>
-<path d="M284 168L335.962 215.25H232.038L284 168Z" fill="black"/>
+<svg width="686" height="707" viewBox="0 0 686 707" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
-  @media (prefers-color-scheme: dark) {
-    path, rect {
-      fill: white;
+    @media (prefers-color-scheme: dark) {
+      path, rect {
+        fill: white;
+      }
     }
-  }
-  @media (prefers-color-scheme: light) {
-    path, rect {
-      fill: black;
+    @media (prefers-color-scheme: light) {
+      path, rect {
+        fill: black;
+      }
     }
-  }
-</style>
-
+  </style>
+<path d="M218 244H452C460.837 243 468 251.163 468 260V691C468 699.837 460.837 707 452 707H234C225.163 707 218 699.837 218 691V244Z" fill="black"/>
+<path d="M403.553 7.77852C412.226 -1.34679 426.774 -1.34681 435.447 7.7785L621.91 203.969C635.228 217.981 625.295 242.5 605.964 242.5H233.036C213.705 242.5 203.772 217.981 217.09 203.969L403.553 7.77852Z" fill="black"/>
+<path d="M406 14C406 6.8203 411.82 1 419 1H668C677.941 1 686 9.05888 686 19V224C686 233.941 677.941 242 668 242H425C414.507 242 406 233.493 406 223V14Z" fill="black"/> 
+<path d="M0 18C0 8.05887 8.05887 0 18 0H218C227.941 0 236 8.05888 236 18V241H18C8.05887 241 0 232.941 0 223V18Z" fill="black"/>
+<rect x="218" y="241" width="250" height="88" fill="black"/>
 </svg>
