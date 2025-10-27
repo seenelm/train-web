@@ -8,7 +8,16 @@ import twitter from "./assets/icons/twitter.svg";
 import tiktok from "./assets/icons/tiktok.svg";
 import successanimation from "./assets/success-animation.json";
 
-const DEMO_URL = "https://train-demo.netlify.app"; // Update this with your actual demo URL
+const DEMO_URL = import.meta.env.VITE_DEMO_URL;
+const TRAIN_EMAIL_API = import.meta.env.VITE_TRAIN_EMAIL_API;
+
+interface BeforeDemoQuestions {
+  name: string;
+  email: string;
+  role: string;
+  used_program: string;
+  program_format?: string[];
+}
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="container">
@@ -46,23 +55,23 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <section class="features">
       <div class="feature-card">
         <div class="feature-icon">🏋️</div>
-        <h3>Smart Workout Planning</h3>
-        <p>Create and assign customized workout programs with drag-and-drop simplicity</p>
+        <h3>Program Management</h3>
+        <p>Create workout and nutirition programs that you can easily share with others</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
-        <h3>Real-Time Progress Tracking</h3>
+        <h3>Workout Tracking</h3>
         <p>Monitor athlete performance with detailed analytics and insights</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">💬</div>
-        <h3>Seamless Communication</h3>
-        <p>Keep coaches, athletes, and parents connected with integrated messaging</p>
+        <h3>Lead Generation</h3>
+        <p>Keep track of who engages with your programs and build a client list</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📱</div>
-        <h3>Cross-Platform Access</h3>
-        <p>Access your training programs anywhere on web and mobile devices</p>
+        <h3>Designed Simply</h3>
+        <p>No hassle sign up - easy program builder, inuitive workout designer and simple UI</p>
       </div>
     </section>
 
@@ -74,12 +83,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <form id="demoForm" class="demo-form">
         <div class="form-group">
           <label for="name">What is your name? *</label>
-          <input type="text" id="name" name="name" required placeholder="John Doe" />
+          <input type="text" id="name" autocomplete="name" name="name" required placeholder="John Doe" />
         </div>
 
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required placeholder="john@example.com" />
+          <input type="email" id="email" autocomplete="email" name="email" required placeholder="john@example.com" />
         </div>
 
         <div class="form-group">
@@ -98,43 +107,47 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </div>
 
         <div class="form-group">
-          <label for="used-program">Do you currently or have you ever used a fitness or nutrition program? *</label>
-          <div class="radio-group">
-            <label class="radio-label">
-              <input type="radio" name="used_program" value="yes" required />
-              <span>Yes</span>
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="used_program" value="no" required />
-              <span>No</span>
-            </label>
-          </div>
+          <fieldset>
+            <legend>Do you currently or have you ever used a fitness or nutrition program? *</legend>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="used_program" value="yes" required />
+                <span>Yes</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="used_program" value="no" required />
+                <span>No</span>
+              </label>
+            </div>
+          </fieldset>
         </div>
 
         <div class="form-group" id="format-group" style="display: none;">
-          <label for="program-format">If yes, what was the format of those programs? *</label>
-          <div class="checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" name="program_format" value="pdf" />
-              <span>PDF</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="program_format" value="excel" />
-              <span>Excel</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="program_format" value="pen-paper" />
-              <span>Pen and Paper</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="program_format" value="application" />
-              <span>Application</span>
-            </label>
-            <label class="checkbox-label">
-              <input type="checkbox" name="program_format" value="other" />
-              <span>Other</span>
-            </label>
-          </div>
+          <fieldset>
+            <legend>If yes, what was the format of those programs?</legend>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="program_format" value="pdf" />
+                <span>PDF</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="program_format" value="excel" />
+                <span>Excel</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="program_format" value="pen-paper" />
+                <span>Pen and Paper</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="program_format" value="application" />
+                <span>Application</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="program_format" value="other" />
+                <span>Other</span>
+              </label>
+            </div>
+          </fieldset>
         </div>
 
         <button type="submit" class="submit-btn" id="submit-btn">
@@ -176,6 +189,34 @@ window.onload = function () {
   ) as HTMLDivElement;
   const successIcon = document.getElementById("success-icon") as HTMLDivElement;
   const formatGroup = document.getElementById("format-group") as HTMLDivElement;
+
+  // Send confirmation email to user
+  async function sendConfirmationEmail(
+    email: string,
+    name: string
+  ): Promise<void> {
+    try {
+      const response = await fetch(`${TRAIN_EMAIL_API}/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipient: email,
+          name: name,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Confirmation email sent successfully:", data);
+    } catch (error) {
+      console.error("Failed to send confirmation email:", error);
+    }
+  }
 
   // Show/hide program format question based on "used program" answer
   const usedProgramRadios = document.querySelectorAll(
@@ -235,52 +276,40 @@ window.onload = function () {
     }
 
     try {
-      // Send to Web3Forms (if you have the API key)
-      if (import.meta.env.VITE_KEY) {
-        const web3FormData = new FormData();
-        web3FormData.append("access_key", import.meta.env.VITE_KEY);
-        web3FormData.append(
-          "subject",
-          `New Demo Request from ${formObject.name}`
-        );
-        web3FormData.append("from_name", "Train Demo Request");
-        web3FormData.append("email", formObject.email as string);
-        const programFormatsText = Array.isArray(formObject.program_format)
-          ? formObject.program_format.join(", ")
-          : formObject.program_format || "N/A";
+      const beforeDemoQuestions: BeforeDemoQuestions = {
+        name: formObject.name as string,
+        email: formObject.email as string,
+        role: formObject.role as string,
+        used_program: formObject.used_program as string,
+      };
 
-        web3FormData.append(
-          "message",
-          `
-Name: ${formObject.name}
-Email: ${formObject.email}
-Role/Experience: ${formObject.role}
-Used Fitness/Nutrition Program: ${formObject.used_program}
-Program Format(s): ${programFormatsText}
-        `
-        );
-
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: web3FormData,
-        });
+      // Add program_format only if it exists
+      if (
+        formObject.program_format &&
+        Array.isArray(formObject.program_format)
+      ) {
+        beforeDemoQuestions.program_format = formObject.program_format;
       }
 
-      // Send to your custom endpoint (if configured)
-      if (import.meta.env.VITE_API_CUSTOM) {
-        await fetch(import.meta.env.VITE_API_CUSTOM, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            recipient: formObject.email,
-            name: formObject.name,
-            demoUrl: DEMO_URL,
-            formData: formObject,
-          }),
-        });
+      const response = await fetch(`${TRAIN_EMAIL_API}/submit-form`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(beforeDemoQuestions),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error! status: ${response.status}`);
       }
+
+      const data = await response.json();
+      console.log("Form submitted successfully:", data);
+
+      await sendConfirmationEmail(
+        formObject.email as string,
+        formObject.name as string
+      );
 
       // Show success animation
       btnText.style.display = "none";

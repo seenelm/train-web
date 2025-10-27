@@ -241,6 +241,21 @@ body {
   min-height: 100px;
 }
 
+/* Fieldset and Legend */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  padding: 0;
+  margin-bottom: 8px;
+}
+
 /* Radio and Checkbox Groups */
 .radio-group,
 .checkbox-group {

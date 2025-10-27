@@ -29,24 +29,28 @@ cp .env.example .env
 
 Required variables:
 
-- `VITE_KEY` - Your Web3Forms API key (get it free at https://web3forms.com/)
-- `VITE_API_CUSTOM` - (Optional) Your custom backend endpoint
+- `VITE_DEMO_URL` - Your demo application URL
+- `VITE_TRAIN_EMAIL_API` - Your backend API endpoint (e.g., `https://api.trainapp.com/api`)
 
-### 3. Update Demo URL
+### 3. Configure Backend API
 
-In `src/main.ts`, update the `DEMO_URL` constant with your actual demo URL:
-
-```typescript
-const DEMO_URL = "https://your-demo-url.com";
-```
-
-### 4. Update Team Email
-
-In `src/main.ts`, update the team email address (line 172):
+Your backend should have a `/submit-form` endpoint that accepts the `BeforeDemoQuestions` DTO:
 
 ```typescript
-to: 'your-team-email@trainapp.com',
+interface BeforeDemoQuestions {
+  name: string;
+  email: string;
+  role: string;
+  used_program: string;
+  program_format?: string[];
+}
 ```
+
+The endpoint should handle:
+
+- Sending notification email to your team
+- Sending demo credentials to the user
+- Any other business logic needed
 
 ## Development
 
@@ -75,10 +79,46 @@ npm run preview
 ## Form Submission Flow
 
 1. User fills out the demo request form
-2. Form data is sent to Web3Forms (which forwards to your team email)
-3. Optionally sent to your custom API endpoint
-4. Success animation plays
-5. Demo link is displayed to the user
+2. Form data is packaged into `BeforeDemoQuestions` DTO
+3. DTO is sent as JSON to `${VITE_TRAIN_EMAIL_API}/submit-form`
+   - Backend processes the form data and sends team notification
+4. Confirmation email sent to user via `${VITE_TRAIN_EMAIL_API}/send-email`
+   - Sends demo credentials and access information to user
+5. Success animation plays
+6. Demo link is displayed to the user
+
+### API Requests
+
+**1. Submit Form** - `POST ${VITE_TRAIN_EMAIL_API}/submit-form`
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "role": "trainer",
+  "used_program": "yes",
+  "program_format": ["pdf", "application"] // Optional, only if used_program = "yes"
+}
+```
+
+**2. Send Confirmation Email** - `POST ${VITE_TRAIN_EMAIL_API}/send-email`
+
+```json
+{
+  "recipient": "john@example.com",
+  "name": "John Doe"
+}
+```
+
+### Error Handling
+
+- **Form submission error**: Throws error and displays to user
+- **Confirmation email error**: Logs error but doesn't fail the entire flow
+- Proper HTTP status checking with `response.ok`
+- Detailed error messages with status codes
+- User-friendly error display ("Error - Please try again")
+- Console logging for debugging
+- 3-second auto-reset on error
 
 ## Customization
 
