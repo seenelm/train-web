@@ -190,34 +190,6 @@ window.onload = function () {
   const successIcon = document.getElementById("success-icon") as HTMLDivElement;
   const formatGroup = document.getElementById("format-group") as HTMLDivElement;
 
-  // Send confirmation email to user
-  async function sendConfirmationEmail(
-    email: string,
-    name: string
-  ): Promise<void> {
-    try {
-      const response = await fetch(`${TRAIN_EMAIL_API}/send-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          recipient: email,
-          name: name,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Confirmation email sent successfully:", data);
-    } catch (error) {
-      console.error("Failed to send confirmation email:", error);
-    }
-  }
-
   // Show/hide program format question based on "used program" answer
   const usedProgramRadios = document.querySelectorAll(
     'input[name="used_program"]'
@@ -305,11 +277,6 @@ window.onload = function () {
 
       const data = await response.json();
       console.log("Form submitted successfully:", data);
-
-      await sendConfirmationEmail(
-        formObject.email as string,
-        formObject.name as string
-      );
 
       // Show success animation
       btnText.style.display = "none";
